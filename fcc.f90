@@ -4,7 +4,7 @@ module lattice_stuff
   private
   public::dp,smallest_fcc
   public::define_smallest_fcc
-  public::fcc_lattice
+  public::lattice
 
   integer,parameter::dp=selected_real_kind(15,300)
   real(kind=dp),dimension(1:16,1:4)::smallest_fcc
@@ -66,47 +66,47 @@ module lattice_stuff
       smallest_fcc(16,4)=0.0_dp
     end subroutine define_smallest_fcc
 
-    function fcc_lattice(layers)
+    function lattice(layers)
       integer::layers,n
-      real(kind=dp),dimension(1:16*layers,1:4)::fcc_lattice
+      real(kind=dp),dimension(1:16*layers,1:4)::lattice
 
       call define_smallest_fcc()
 
       n=1
       do while (n<=layers) !adds the layers of MgO
-        fcc_lattice((layers*16)-(8*(n-1)+7),1:4)=smallest_fcc(9,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+6),1:4)=smallest_fcc(10,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+5),1:4)=smallest_fcc(11,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+4),1:4)=smallest_fcc(12,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+3),1:4)=smallest_fcc(13,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+2),1:4)=smallest_fcc(14,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+1),1:4)=smallest_fcc(15,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)),1:4)=smallest_fcc(16,1:4)
-        fcc_lattice((layers*16)-(8*(n-1)+7):layers*16-((8*n-1)),3)=fcc_lattice(layers*16-((8*n-1)+7):layers*16-((8*n-1)),3)+(0.5_dp*(n-1))
+        lattice((layers*16)-(8*(n-1)+7),1:4)=smallest_fcc(9,1:4)
+        lattice((layers*16)-(8*(n-1)+6),1:4)=smallest_fcc(10,1:4)
+        lattice((layers*16)-(8*(n-1)+5),1:4)=smallest_fcc(11,1:4)
+        lattice((layers*16)-(8*(n-1)+4),1:4)=smallest_fcc(12,1:4)
+        lattice((layers*16)-(8*(n-1)+3),1:4)=smallest_fcc(13,1:4)
+        lattice((layers*16)-(8*(n-1)+2),1:4)=smallest_fcc(14,1:4)
+        lattice((layers*16)-(8*(n-1)+1),1:4)=smallest_fcc(15,1:4)
+        lattice((layers*16)-(8*(n-1)),1:4)=smallest_fcc(16,1:4)
+        lattice((layers*16)-(8*(n-1)+7):(layers*16)-((8*n-1)),3)=(lattice((layers*16)-((8*n-1)+7):(layers*16)-((8*n-1)),3)+(0.5_dp*(n-1)))
         n=n+1
       end do
 
       n=1
       do while (n<=layers) !adds the layers of CaO
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+7),1:4)=smallest_fcc(1,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+6),1:4)=smallest_fcc(2,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+5),1:4)=smallest_fcc(3,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+4),1:4)=smallest_fcc(4,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+3),1:4)=smallest_fcc(5,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+2),1:4)=smallest_fcc(6,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+1),1:4)=smallest_fcc(7,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)),1:4)=smallest_fcc(8,1:4)
-        fcc_lattice(((layers*16)/2)-(8*(n-1)+7):layers*16-((8*n-1)),3)=fcc_lattice(((layers*16)/2)-((8*n-1)+7):((layers*16)/2)-((8*n-1)),3)+((0.5_dp*(n-1))+1.0_dp)
+        lattice(((layers*16)/2)-(8*(n-1)+7),1:4)=smallest_fcc(1,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+6),1:4)=smallest_fcc(2,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+5),1:4)=smallest_fcc(3,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+4),1:4)=smallest_fcc(4,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+3),1:4)=smallest_fcc(5,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+2),1:4)=smallest_fcc(6,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+1),1:4)=smallest_fcc(7,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)),1:4)=smallest_fcc(8,1:4)
+        lattice(((layers*16)/2)-(8*(n-1)+7):((layers*16)/2)-((8*n-1)),3)=(lattice(((layers*16)/2)-((8*n-1)+7):((layers*16)/2)-((8*n-1)),3)+((0.5_dp*(n-1))+1.0_dp))
         n=n+1
       end do
-    end function fcc_lattice
+    end function lattice
 
 end module lattice_stuff
 
 
 module coord_file
-  implicit none
-  use larrice_stuff
+    use lattice_stuff
+    implicit none
 
   private
   public::create_file
@@ -141,4 +141,5 @@ end module coord_file
 program fcc
   use lattice_stuff
   use coord_file
+  implicit none
 end program fcc
