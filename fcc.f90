@@ -11,6 +11,7 @@ module lattice_stuff
 
   contains
     subroutine define_smallest_fcc()
+      !creates the following face centered cubic lattice
       !    atom       x               y               z
       !     O    0.5000000000    0.7500000000    0.5000000000
       !     O    0.5000000000    0.5000000000    0.0000000000
@@ -28,7 +29,6 @@ module lattice_stuff
       !    Mg    0.0000000000    0.2500000000    0.5000000000
       !    Mg    0.5000000000    0.0000000000    0.5000000000
       !    Mg    0.5000000000    0.2500000000    0.0000000000
-      !     O=0     Ca=1      Mg=2
       smallest_fcc(1:4,1)=0.0_dp
       smallest_fcc(5:8,1)=1.0_dp
       smallest_fcc(9:12,1)=0.0_dp
@@ -73,7 +73,7 @@ module lattice_stuff
       call define_smallest_fcc()
 
       n=1
-      do while (n<=layers)
+      do while (n<=layers) !adds the layers of MgO
         fcc_lattice((layers*16)-(8*(n-1)+7),1:4)=smallest_fcc(9,1:4)
         fcc_lattice((layers*16)-(8*(n-1)+6),1:4)=smallest_fcc(10,1:4)
         fcc_lattice((layers*16)-(8*(n-1)+5),1:4)=smallest_fcc(11,1:4)
@@ -87,7 +87,7 @@ module lattice_stuff
       end do
 
       n=1
-      do while (n<=layers)
+      do while (n<=layers) !adds the layers of CaO
         fcc_lattice(((layers*16)/2)-(8*(n-1)+7),1:4)=smallest_fcc(1,1:4)
         fcc_lattice(((layers*16)/2)-(8*(n-1)+6),1:4)=smallest_fcc(2,1:4)
         fcc_lattice(((layers*16)/2)-(8*(n-1)+5),1:4)=smallest_fcc(3,1:4)
@@ -113,26 +113,26 @@ module coord_file
 
   contains 
 
-    subroutine create_file(array)
-    character (Len=2) :: O,Ca,Mg
-    integer :: i, N 
-    real(kind=dp), allocatable, intent (in) :: array(:,:)
-   
-    Mg = "Mg"
-    Ca = "Ca"
-    O = "O"
-    N= 16 !need to find number of rows in array as not always 16
+    subroutine create_file(lattice,layers)
+      integer :: i,layers,n,istat
+      real(kind=dp),dimension(1:16*layers,1:4)::lattice
 
-    open(unit=11,file='data.dat',status='replace', action="write")
-      do i =1 , N
-        if(array(i,1)==0)then
-          write(11,*) O, array(i,2), array(i,3), array(i,4)
-        else if(array(i,1)==1)then
-          write(11,*) Ca, array(i,2), array(i,3), array(i,4)
-        else
-          write(11,*) Mg, array(i,2), array(i,3), array(i,4)
-        end if
-      end do
+      n=16*layers !nuber of atoms in the lattice
+
+      open(unit=11,file='data.dat',status='replace', action="write",iostat=istat)
+      if (istat .ne. 0) stop "Error opening file"
+        do i=1,n
+          if(int(lattice(i,1))==0)then
+            write(unit=11,fmt=*,iostat=istat) "O",lattice(i,2),lattice(i,3),lattice(i,4)
+            if (istat .ne. 0) stop "Error opening file"
+          elseif(int(lattice(i,1))==1)then
+            write(unit=11,fmt=*,iostat=istat) "Ca",lattice(i,2),lattice(i,3),lattice(i,4)
+            if (istat .ne. 0) stop "Error opening file"
+          elseif(int(lattice(i,1))==2)then
+            write(unit=11,fmt=*,iostat=istat) "Mg",lattice(i,2),lattice(i,3),lattice(i,4)
+            if (istat .ne. 0) stop "Error opening file"
+          end if
+        end do
       close(11)
     end subroutine create_file
 
