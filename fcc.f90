@@ -67,7 +67,41 @@ module lattice_stuff
 
 end module lattice_stuff
 
+
+module coord_file
+implicit none
+
+integer,parameter::dp=selected_real_kind(15,300)
+
+contains 
+
+  subroutine create_file(array)
+  character (Len=2) :: O,Ca,Mg
+  integer :: i, N 
+  real(kind=dp), allocatable, intent (in) :: array(:,:)
+ 
+  Mg = "Mg"
+  Ca = "Ca"
+  O = "O"
+  N= 16 !need to find number of rows in array as not always 16
+
+
+  open(unit=11,file='data.dat',status='replace', action="write")
+    do i =1 , N
+      if(array(i,1)==0)then
+        write(11,*) O, array(i,2), array(i,3), array(i,4)
+      else if(array(i,1)==1)then
+        write(11,*) Ca, array(i,2), array(i,3), array(i,4)
+      else
+        write(11,*) Mg, array(i,2), array(i,3), array(i,4)
+      end if
+    end do
+    close(11)
+  end subroutine create_file
+
+end module coord_file
+
 program fcc
   use lattice_stuff
-
+  use coord_file
 end program fcc
