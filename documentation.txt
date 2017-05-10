@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+ SSSS   L        GGGG   55555 K  K   FFFFF CCCCC CCCCC   FFFFF  99999 00000
+S       L       G       5     K K  . F     C     C       F      9   9 0   0
+ SSS    L       G  GG   55555 KK     FFFF  C     C       FFFF   99999 0   0
+    S   L       G   G       5 K K  . F     C     C       F          9 0   0
+SSSS  . LLLLL .  GGGG . 55555 K  K   F     CCCCC CCCCC . F      99999 00000
+---------------------------------------------------------------------------
+With the fcc.f90 file it must be compiled with the following terminal
+command: gfortran fcc.f90 -o fcc
+From this it is ran with ./fcc
+When you run this the terminal will ask you "How many layers (of 8 atoms) 
+thick do you want MgO/CaO layer?" This allows you to pick the size of the
+lattice produced by the code. To do this input an integer number. For 
+example inputting a "1" would generate a lattice with 16 atoms, 8 of which
+belong to MgO and 8 of which belong to CaO. After this a file will be made
+that contains the coordinates and atom type of all the atoms in this 
+lattice, names "copy_me_into_CASTEP.dat". The contents of this file should
+be coppied into "combo.cell" in the "%BLOCK POSITIONS_FRAC" section.
+
+---------------------------------------------------------------------------
+ SSSS   L        GGGG   55555 K  K   CCCCC  AAA   SSSS TTTTT EEEEE PPPPP
+S       L       G       5     K K  . C     A   A S       T   E     P   P
+ SSS    L       G  GG   55555 KK     C     AAAAA  SSS    T   EEEE  PPPPP
+    S   L       G   G       5 K K  . C     A   A     S   T   E     P    
+SSSS  . LLLLL .  GGGG . 55555 K  K   CCCCC A   A SSSS    T   EEEEE P    
+---------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+ SSSS   L        GGGG   55555 K  K   JJJJJ M   M OOOOO L    
+S       L       G       5     K K  .     J MM MM O   O L    
+ SSS    L       G  GG   55555 KK         J M M M O   O L    
+    S   L       G   G       5 K K  . J   J M   M O   O L    
+SSSS  . LLLLL .  GGGG . 55555 K  K    JJJ  M   M OOOOO LLLLL
+---------------------------------------------------------------------------
