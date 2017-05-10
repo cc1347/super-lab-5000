@@ -24,7 +24,8 @@ S       L       G       5     K K  . C     A   A S       T   E     P   P
     S   L       G   G       5 K K  . C     A   A     S   T   E     P    
 SSSS  . LLLLL .  GGGG . 55555 K  K   CCCCC A   A SSSS    T   EEEEE P    
 ---------------------------------------------------------------------------
-
+Use the combo.cell file created above and combo.param to run CASTEP. The line
+"mpirun -np 1 castep.mpi combo" will generate a .castep file with results. 
 
 ---------------------------------------------------------------------------
  SSSS   L        GGGG   55555 K  K   JJJJJ M   M OOOOO L    
