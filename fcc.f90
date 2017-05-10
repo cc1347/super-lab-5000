@@ -131,49 +131,49 @@ module lattice_stuff
         lattice(((layers*16)/2)-(8*(n-1)+7),1)=smallest_fcc(1,1) !atom
         lattice(((layers*16)/2)-(8*(n-1)+7),2)=smallest_fcc(1,2) !x
         y_coordinate=smallest_fcc(1,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+7),3)=y_coordinate !y
         lattice(((layers*16)/2)-(8*(n-1)+7),4)=smallest_fcc(1,4) !z
         lattice(((layers*16)/2)-(8*(n-1)+6),1)=smallest_fcc(2,1)
         lattice(((layers*16)/2)-(8*(n-1)+6),2)=smallest_fcc(2,2)
         y_coordinate=smallest_fcc(2,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+6),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+6),4)=smallest_fcc(2,4)
         lattice(((layers*16)/2)-(8*(n-1)+5),1)=smallest_fcc(3,1)
         lattice(((layers*16)/2)-(8*(n-1)+5),2)=smallest_fcc(3,2)
         y_coordinate=smallest_fcc(3,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+5),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+5),4)=smallest_fcc(3,4)
         lattice(((layers*16)/2)-(8*(n-1)+4),1)=smallest_fcc(4,1)
         lattice(((layers*16)/2)-(8*(n-1)+4),2)=smallest_fcc(4,2)
         y_coordinate=smallest_fcc(4,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+4),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+4),4)=smallest_fcc(4,4)
         lattice(((layers*16)/2)-(8*(n-1)+3),1)=smallest_fcc(5,1)
         lattice(((layers*16)/2)-(8*(n-1)+3),2)=smallest_fcc(5,2)
         y_coordinate=smallest_fcc(5,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+3),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+3),4)=smallest_fcc(5,4)
         lattice(((layers*16)/2)-(8*(n-1)+2),1)=smallest_fcc(6,1)
         lattice(((layers*16)/2)-(8*(n-1)+2),2)=smallest_fcc(6,2)
         y_coordinate=smallest_fcc(6,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+2),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+2),4)=smallest_fcc(6,4)
         lattice(((layers*16)/2)-(8*(n-1)+1),1)=smallest_fcc(7,1)
         lattice(((layers*16)/2)-(8*(n-1)+1),2)=smallest_fcc(7,2)
         y_coordinate=smallest_fcc(7,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)+1),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)+1),4)=smallest_fcc(7,4)
         lattice(((layers*16)/2)-(8*(n-1)),1)=smallest_fcc(8,1)
         lattice(((layers*16)/2)-(8*(n-1)),2)=smallest_fcc(8,2)
         y_coordinate=smallest_fcc(8,3)
-        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+1.0_dp))/(layers*1.0_dp)
+        y_coordinate=(y_coordinate+((0.5_dp*(n-1))+(0.5_dp*(layers-1))))/(layers*1.0_dp)
         lattice(((layers*16)/2)-(8*(n-1)),3)=y_coordinate
         lattice(((layers*16)/2)-(8*(n-1)),4)=smallest_fcc(8,4)
         n=n+1
@@ -221,9 +221,9 @@ program fcc
   use lattice_stuff
   use coord_file
   implicit none
-  real(kind=dp),dimension(1:48,1:4)::MgO_&_CaO_lattice
+  real(kind=dp),dimension(1:48,1:4)::MgO_CaO_lattice
 
-  MgO_&_CaO_lattice=lattice(3)
-  call create_file(MgO_&_CaO_lattice,3)
+  MgO_CaO_lattice=lattice(3)
+  call create_file(MgO_CaO_lattice,3)
 
 end program fcc
