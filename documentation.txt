@@ -33,3 +33,5 @@ S       L       G       5     K K  .     J MM MM O   O L
     S   L       G   G       5 K K  . J   J M   M O   O L    
 SSSS  . LLLLL .  GGGG . 55555 K  K    JJJ  M   M OOOOO LLLLL
 ---------------------------------------------------------------------------
+JMOL - Open JMOL then open the CATSTEP output as a file to visualize the 
+lattice. This is used to check if the output is reasonable.
