@@ -137,7 +137,7 @@ program fcc
   integer::thickness
   real(kind=dp),dimension(:,:),allocatable::MgO_CaO_lattice
 
-  print*, "How many layers thick do you want MgO/CaO layer?"
+  print*, "How many layers (of 8 atoms) thick do you want MgO/CaO layer?"
   read(*,fmt=*) thickness
 
   allocate(MgO_CaO_lattice(1:16*thickness,1:4))
