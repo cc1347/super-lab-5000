@@ -25,7 +25,9 @@ S       L       G       5     K K  . C     A   A S       T   E     P   P
 SSSS  . LLLLL .  GGGG . 55555 K  K   CCCCC A   A SSSS    T   EEEEE P    
 ---------------------------------------------------------------------------
 Use the combo.cell file created above and combo.param to run CASTEP. The line
-"mpirun -np 1 castep.mpi combo" will generate a .castep file with results. 
+"mpirun -np 1 castep.mpi combo" will generate a .castep file with results. If
+more than 1 layer is generated then multiply the y-lattice constant (in the second column)
+of the .cell file by the number of layers to accommodate the extra atoms.
 
 ---------------------------------------------------------------------------
  SSSS   L        GGGG   55555 K  K   JJJJJ M   M OOOOO L    
